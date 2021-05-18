@@ -26,7 +26,8 @@ class TextViewSet(ModelViewSet):
     def find_string(self, request):
         serializer = TextSerializer(data=request.data)
         if serializer.is_valid():
-            if Text.objects.exists(text=request.data):
+            print(request.data["text"])
+            if Text.objects.filter(text=request.data["text"]):
                 return Response({"status": status.HTTP_200_OK})
             return Response({"status": status.HTTP_403_FORBIDDEN})
         else:
